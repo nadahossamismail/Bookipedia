@@ -1,5 +1,5 @@
-import 'package:bookipedia/presentation_layer/login/login_view.dart';
-import 'package:bookipedia/presentation_layer/splash/splash_view.dart';
+import 'package:bookipedia/presentation_layer/views/login_view.dart';
+import 'package:bookipedia/presentation_layer/views/splash_view.dart';
 import 'package:flutter/material.dart';
 
 class Routes 
