@@ -1,5 +1,5 @@
-class ImageManager{
- static const String IMAGE_PATH="assets/images";
+class ImageManager {
+  static const String imagePath = "assets/images";
 
- static const String splashLogo ="$IMAGE_PATH/splashlogo";
+  static const String splashLogo = "$imagePath/splashlogo";
 }
