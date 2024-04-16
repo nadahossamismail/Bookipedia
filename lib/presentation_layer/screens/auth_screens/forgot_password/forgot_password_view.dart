@@ -36,30 +36,27 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                     horizontal: 20, vertical: AppSpacingSizing.s12),
                 child: Form(
                     key: forgotPasswordViewModel.formKey,
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text("Forgot password",
-                              style: AppTextStyle.title),
-                          const SizedBox(height: AppSpacingSizing.s8),
-                          const Text(
-                              "Enter your email for verification process, we will send you 6 digits code.",
-                              //  textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: FontSize.f18,
-                                  fontWeight: FontWeight.w400)),
-                          const SizedBox(height: AppSpacingSizing.s24),
-                          AppTextFormField(
-                            label: "Email",
-                            keyboardType: TextInputType.emailAddress,
-                            validator: forgotPasswordViewModel.validateEmail,
-                            controller: forgotPasswordViewModel.emailController,
-                          ),
-                          const SizedBox(height: AppSpacingSizing.s48),
-                          AppMaterialButton(
-                              onPressed: () =>
-                                  forgotPasswordViewModel.sendOtp(context),
-                              text: "Continue"),
-                        ])))));
+                    child: Column(children: [
+                      const Text("Forgot password", style: AppTextStyle.title),
+                      const SizedBox(height: AppSpacingSizing.s8),
+                      const Text(
+                          "Enter your email for verification process, we will send you 6 digits code.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: FontSize.f18,
+                              fontWeight: FontWeight.w400)),
+                      const SizedBox(height: AppSpacingSizing.s24),
+                      AppTextFormField(
+                        label: "Email",
+                        keyboardType: TextInputType.emailAddress,
+                        validator: forgotPasswordViewModel.validateEmail,
+                        controller: forgotPasswordViewModel.emailController,
+                      ),
+                      const SizedBox(height: AppSpacingSizing.s32),
+                      AppMaterialButton(
+                          onPressed: () =>
+                              forgotPasswordViewModel.sendOtp(context),
+                          text: "Continue"),
+                    ])))));
   }
 }
