@@ -1,7 +1,8 @@
-import 'package:bookipedia/presentation_layer/screens/forgot_password/forgot_password_view.dart';
+import 'package:bookipedia/presentation_layer/screens/auth_screens/forgot_password/forgot_password_view.dart';
+import 'package:bookipedia/presentation_layer/screens/auth_screens/login/login_view.dart';
+import 'package:bookipedia/presentation_layer/screens/auth_screens/reset_password/reset_password_view.dart';
 import 'package:bookipedia/presentation_layer/screens/home/home_view.dart';
-import 'package:bookipedia/presentation_layer/screens/login/login_view.dart';
-import 'package:bookipedia/presentation_layer/screens/sign_up/sign_up_view.dart';
+import 'package:bookipedia/presentation_layer/screens/auth_screens/sign_up/sign_up_view.dart';
 import 'package:bookipedia/presentation_layer/screens/splash/splash_view.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,7 @@ class Routes {
   static const String verifyAccountRoute = "/verifyAccountRoute";
   static const String homeRoute = "/homeRoute";
   static const String forgotPasswordRoute = "/forgotPassword";
+  static const String resetPasswordRoute = "/resetPassword";
 }
 
 class RouteGenerator {
@@ -29,6 +31,8 @@ class RouteGenerator {
       //   return MaterialPageRoute(builder: (_) => const VerifyAccountView());
       case Routes.homeRoute:
         return MaterialPageRoute(builder: (_) => const HomeView());
+      case Routes.resetPasswordRoute:
+        return MaterialPageRoute(builder: (_) => const ResetPasswordView());
       case Routes.forgotPasswordRoute:
         return MaterialPageRoute(builder: (_) => const ForgotPasswordView());
 

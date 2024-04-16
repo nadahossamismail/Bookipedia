@@ -1,4 +1,5 @@
 import 'package:bookipedia/app/style/app_colors.dart';
+import 'package:bookipedia/app/style/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class AppMaterialButton extends StatelessWidget {
@@ -19,14 +20,15 @@ class AppMaterialButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
         minWidth: width,
-        height: 60,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+        elevation: AppSpacingSizing.s4,
+        height: AppSpacingSizing.s64,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSpacingSizing.s24)),
         color: ColorManager.primary,
         onPressed: onPressed,
         child: child ??
-            Text(
-              text,
-              style: const TextStyle(fontSize: 20, color: Colors.white),
-            ));
+            Text(text,
+                style: const TextStyle(
+                    fontSize: FontSize.f20, color: Colors.white)));
   }
 }

@@ -1,0 +1,31 @@
+import 'package:bookipedia/app/error_messages.dart';
+import 'package:bookipedia/presentation_layer/screens/auth_screens/verify_account/verify_account_view.dart';
+import 'package:flutter/material.dart';
+
+class ForgotPasswordViewModel {
+  late TextEditingController emailController;
+  final formKey = GlobalKey<FormState>();
+  void init() {
+    emailController = TextEditingController();
+  }
+
+  void dispose() {
+    emailController.dispose();
+  }
+
+  String? validateEmail(email) {
+    if (email == null || email.isEmpty) {
+      return ErrorMessages().emptyField;
+    } else if (!email.contains("@")) {
+      return "Not Vaild";
+    }
+    return null;
+  }
+
+  void sendOtp(context) {
+    if (formKey.currentState!.validate()) {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (_) => VerifyAccountView(emailController.text)));
+    }
+  }
+}

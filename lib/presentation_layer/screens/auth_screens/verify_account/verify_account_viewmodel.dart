@@ -16,7 +16,7 @@ class VerifyAccountViewModel {
   static void initializeControllers(screen) {
     timerController = CustomTimerController(
         vsync: screen,
-        begin: const Duration(minutes: 5),
+        begin: const Duration(seconds: 10),
         end: const Duration(),
         initialState: CustomTimerState.reset,
         interval: CustomTimerInterval.milliseconds);
@@ -31,6 +31,7 @@ class VerifyAccountViewModel {
 
   static void onResendComplete(context) {
     AppSnackBar.showSnackBar(context, "check your mail!");
+    timerController.reset();
     timerController.start();
   }
 
@@ -45,7 +46,6 @@ class VerifyAccountViewModel {
     } else {
       ResendVerificationCubit.get(context)
           .sendRequest(ResendVerificationRequestBody(email: email));
-      timerController.reset();
       pinputController.clear();
     }
   }

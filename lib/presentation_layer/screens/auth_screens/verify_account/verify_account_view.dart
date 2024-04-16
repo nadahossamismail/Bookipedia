@@ -1,7 +1,7 @@
 import 'package:bookipedia/app/app_routes.dart';
 import 'package:bookipedia/cubits/resend_verifivation/resend_verification_cubit.dart';
 import 'package:bookipedia/cubits/verify_account/verify_account_cubit.dart';
-import 'package:bookipedia/presentation_layer/screens/verify_account/verify_account_viewmodel.dart';
+import 'package:bookipedia/presentation_layer/screens/auth_screens/verify_account/verify_account_viewmodel.dart';
 import 'package:bookipedia/presentation_layer/widgets/Loading.dart';
 import 'package:bookipedia/presentation_layer/widgets/alert_dialog.dart';
 import 'package:bookipedia/presentation_layer/widgets/material_button.dart';
@@ -34,6 +34,18 @@ class _VerifyAccountViewState extends State<VerifyAccountView>
     super.dispose();
   }
 
+  bool value = false;
+
+  bool canResend() {
+    VerifyAccountViewModel.timerController.addListener(() {
+      setState(() {
+        value = VerifyAccountViewModel.timerController.state.value ==
+            CustomTimerState.finished;
+      });
+    });
+    return value;
+  }
+
   @override
   Widget build(BuildContext context) {
     VerifyAccountViewModel? verifyAccountViewModel;
@@ -62,20 +74,19 @@ class _VerifyAccountViewState extends State<VerifyAccountView>
                         const Text("Verification Code",
                             textAlign: TextAlign.center,
                             style: AppTextStyle.title),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: AppSpacingSizing.s4),
                         Text(
                           "Please enter the code sent to : ${widget.userEmail}.",
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w400),
                         ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: AppSpacingSizing.s24),
                         AppPinput(
-                          controller: VerifyAccountViewModel.pinputController,
-                          onComplete: (otp) => verifyAccountViewModel =
-                              VerifyAccountViewModel(otp: otp),
-                        ),
-                        const SizedBox(height: 20),
+                            controller: VerifyAccountViewModel.pinputController,
+                            onComplete: (otp) => verifyAccountViewModel =
+                                VerifyAccountViewModel(otp: otp)),
+                        const SizedBox(height: AppSpacingSizing.s24),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -93,7 +104,7 @@ class _VerifyAccountViewState extends State<VerifyAccountView>
                                 }),
                           ],
                         ),
-                        const SizedBox(height: 60),
+                        const SizedBox(height: AppSpacingSizing.s32),
                         BlocConsumer<ResendVerificationCubit,
                             ResendVerificationState>(
                           listener: (context, state) {
@@ -103,19 +114,24 @@ class _VerifyAccountViewState extends State<VerifyAccountView>
                             } else if (state is ResendVerificationCompleted) {
                               VerifyAccountViewModel.onResendComplete(context);
                             } else if (state is ResendVerificationFailure) {
+                              setState(() {
+                                value = true;
+                              });
                               AppAlertDialog.showAlert(
                                   context, "Please try again later");
                             }
                           },
-                          builder: (context, state) => TextButton.icon(
-                              label: Text("Resend code",
-                                  style: AppTextStyle.textButtonText),
-                              icon: const Icon(Icons.refresh),
-                              onPressed: () =>
-                                  VerifyAccountViewModel.resendVerifacationCode(
-                                      context, state, widget.userEmail)),
+                          builder: (context, state) => Visibility(
+                              visible: canResend(),
+                              child: TextButton.icon(
+                                  label: Text("Resend code",
+                                      style: AppTextStyle.textButtonText),
+                                  icon: const Icon(Icons.refresh),
+                                  onPressed: () => VerifyAccountViewModel
+                                      .resendVerifacationCode(
+                                          context, state, widget.userEmail))),
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: AppSpacingSizing.s8),
                         AppMaterialButton(
                             text: "Submit",
                             child: state is VerifyAccountLoading

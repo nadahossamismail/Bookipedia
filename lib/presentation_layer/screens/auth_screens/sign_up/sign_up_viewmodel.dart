@@ -1,16 +1,24 @@
 import 'package:bookipedia/app/error_messages.dart';
 import 'package:bookipedia/cubits/sign_up/sign_up_cubit.dart';
 import 'package:bookipedia/data_layer/models/sign_up/sign_up_request_model.dart';
-import 'package:bookipedia/presentation_layer/screens/verify_account/verify_account_view.dart';
+import 'package:bookipedia/presentation_layer/screens/auth_screens/verify_account/verify_account_view.dart';
+import 'package:bookipedia/presentation_layer/widgets/alert_dialog.dart';
 import 'package:bookipedia/presentation_layer/widgets/snack_bar.dart';
 import 'package:flutter/material.dart';
 
 class SignUpViewModel {
   var formkey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
-  TextEditingController usernameController = TextEditingController();
+  late TextEditingController emailController;
+  late TextEditingController passwordController;
+  late TextEditingController confirmPasswordController;
+  late TextEditingController usernameController;
+
+  void init() {
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    confirmPasswordController = TextEditingController();
+    usernameController = TextEditingController();
+  }
 
   void dispose() {
     emailController.dispose();
@@ -20,23 +28,23 @@ class SignUpViewModel {
   }
 
   String? validateUserName(String? username) {
-    if (username!.isEmpty) {
+    if (username == null || username.isEmpty) {
       return ErrorMessages().emptyField;
     }
     return null;
   }
 
   String? validateEmail(String? email) {
-    if (email!.isEmpty) {
+    if (email == null || email.isEmpty) {
       return ErrorMessages().emptyField;
     } else if (!email.contains("@")) {
-      return "Not vaild";
+      return "Not Vaild";
     }
     return null;
   }
 
   String? validatePassword(String? password) {
-    if (password!.isEmpty) {
+    if (password == null || password.isEmpty) {
       return ErrorMessages().emptyField;
     } else if (password.length < 8) {
       return "Password is too short";
@@ -45,7 +53,7 @@ class SignUpViewModel {
   }
 
   String? validateConfirmPassword(String? password) {
-    if (password!.isEmpty) {
+    if (password == null || password.isEmpty) {
       return ErrorMessages().emptyField;
     } else if (password.compareTo(passwordController.text) != 0) {
       return "Not matched";
@@ -59,6 +67,14 @@ class SignUpViewModel {
         name: usernameController.text,
         password: passwordController.text,
         passwordConfirm: confirmPasswordController.text);
+  }
+
+  void signUpCubitListner(state, context) {
+    if (state is SignUpFailure) {
+      return AppAlertDialog.showAlert(context, state.message);
+    } else if (state is SignUpCompleted) {
+      return goToVerifyAccount(context);
+    }
   }
 
   void goToVerifyAccount(context) {
