@@ -1,4 +1,6 @@
 import 'package:bookipedia/app/style/app_colors.dart';
+import 'package:bookipedia/app/style/app_text_style.dart';
+import 'package:bookipedia/cubits/visibility_icon/visibility_cubit.dart';
 import 'package:flutter/material.dart';
 
 class AppTextFormField extends StatelessWidget {
@@ -9,17 +11,18 @@ class AppTextFormField extends StatelessWidget {
   final bool obscureText;
   final String label;
   final Widget? suffixIcon;
+  final bool? isConfirm;
 
-  const AppTextFormField({
-    super.key,
-    this.validator,
-    this.keyboardType,
-    required this.controller,
-    this.prefixIcon,
-    this.obscureText = false,
-    required this.label,
-    this.suffixIcon,
-  });
+  const AppTextFormField(
+      {super.key,
+      this.validator,
+      this.keyboardType,
+      required this.controller,
+      this.prefixIcon,
+      this.obscureText = false,
+      required this.label,
+      this.suffixIcon,
+      this.isConfirm});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,11 @@ class AppTextFormField extends StatelessWidget {
       validator: validator,
       keyboardType: keyboardType,
       controller: controller,
-      obscureText: obscureText,
+      obscureText: isConfirm == null
+          ? obscureText
+          : isConfirm!
+              ? VisibilityCubit.get(context).visibleConfirmPassword
+              : VisibilityCubit.get(context).visiblePassword,
       autocorrect: false,
       enableIMEPersonalizedLearning: false,
       decoration: InputDecoration(
@@ -38,14 +45,22 @@ class AppTextFormField extends StatelessWidget {
             )),
         labelText: label,
         prefixIcon: prefixIcon,
-        floatingLabelStyle: const TextStyle(color: Colors.white),
-        floatingLabelBehavior: FloatingLabelBehavior.never,
+        floatingLabelStyle: TextStyle(
+            fontSize: FontSize.f20, color: Theme.of(context).hintColor),
+        // floatingLabelBehavior: FloatingLabelBehavior.never,
+
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 30, vertical: 18),
-        suffixIcon: suffixIcon,
+        suffixIcon: isConfirm == null
+            ? suffixIcon
+            : isConfirm!
+                ? VisibilityCubit.get(context)
+                    .visibilityIcon(PasswordOrConfirmation.confirmPassword)
+                : VisibilityCubit.get(context)
+                    .visibilityIcon(PasswordOrConfirmation.password),
         border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
-          Radius.circular(25),
+          Radius.circular(AppSpacingSizing.s24),
         )),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:bookipedia/app/style/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -7,7 +8,11 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home screen"),
+        centerTitle: true,
+        title: const Text(
+          "Home screen",
+          style: TextStyle(fontSize: FontSize.f20),
+        ),
       ),
     );
   }
