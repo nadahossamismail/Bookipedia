@@ -1,3 +1,5 @@
+import 'package:bookipedia/presentation_layer/screens/Library/libraryscreen.dart';
+import 'package:bookipedia/presentation_layer/screens/UserDocument/userdocument.dart';
 import 'package:bookipedia/presentation_layer/screens/forgot_password/forgot_password_view.dart';
 import 'package:bookipedia/presentation_layer/screens/home/home_view.dart';
 import 'package:bookipedia/presentation_layer/screens/login/login_view.dart';
@@ -14,6 +16,8 @@ class Routes {
   static const String verifyAccountRoute = "/verifyAccountRoute";
   static const String homeRoute = "/homeRoute";
   static const String forgotPasswordRoute = "/forgotPassword";
+  static const String userDocumentScreen = "/userDocumentScreen";
+  static const String libraryScreen = "/libraryScreen";
 }
 
 class RouteGenerator {
@@ -31,6 +35,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const HomeView());
       case Routes.forgotPasswordRoute:
         return MaterialPageRoute(builder: (_) => const ForgotPasswordView());
+      case Routes.libraryScreen:
+        return MaterialPageRoute(builder: (_) => const LibraryScreen());
+      case Routes.userDocumentScreen:
+        return MaterialPageRoute(builder: (_) => const UserDocumentScreen());
 
       default:
         return undefinedRoute();
