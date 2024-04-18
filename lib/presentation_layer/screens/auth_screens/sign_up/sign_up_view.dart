@@ -55,7 +55,8 @@ class _SignUpState extends State<SignUp> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text("Sign-up", style: AppTextStyle.authHeadline),
+                            const Text("Sign-up",
+                                style: AppTextStyle.authHeadline),
                             const SizedBox(height: AppSpacingSizing.s32),
                             AppTextFormField(
                               label: "Name",
