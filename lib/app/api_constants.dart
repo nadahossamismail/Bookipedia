@@ -1,3 +1,5 @@
+import 'package:bookipedia/main.dart';
+
 class ApiEndpoints {
   static const String appBaseUrl = "https://bookipedia-backend.onrender.com";
   static const String signUpEndPoint = "/auth/signup";
@@ -11,4 +13,12 @@ class ApiEndpoints {
   static const String updatePasswordEndPoint = "/auth/update-password";
   static const String resendVerificationEmailEndPoint =
       "/auth/resend-verification-email";
+  static const String getAllBooks = "/book";
+  static const String addDocument = "/document";
+}
+
+class ApiHeaders {
+  static Map<String, dynamic> tokenHeader = {
+    'Authorization': 'Bearer ${preferences.get('token')}'
+  };
 }

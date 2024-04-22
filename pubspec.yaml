@@ -18,6 +18,10 @@ dependencies:
   custom_timer: ^0.2.3
   syncfusion_flutter_pdfviewer: ^25.1.39
   file_picker: ^8.0.0+1
+  shared_preferences: ^2.2.3
+  cached_network_image: ^3.3.1
+  gap: ^3.0.1
+  http_parser: ^4.0.2
 
 
 

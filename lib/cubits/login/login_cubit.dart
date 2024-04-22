@@ -1,6 +1,7 @@
 import 'package:bookipedia/data_layer/Api_requests/login_request.dart';
 import 'package:bookipedia/data_layer/models/login/login_request_model.dart';
 import 'package:bookipedia/data_layer/models/login/login_response_model.dart';
+import 'package:bookipedia/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'login_state.dart';
@@ -25,5 +26,7 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  void saveToken(token) {}
+  void saveToken(token) {
+    preferences.setString('token', token);
+  }
 }

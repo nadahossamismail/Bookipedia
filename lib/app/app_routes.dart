@@ -19,8 +19,8 @@ class Routes {
   static const String verifyAccountRoute = "/verifyAccountRoute";
   static const String homeRoute = "/homeRoute";
   static const String forgotPasswordRoute = "/forgotPassword";
-  static const String userDocumentScreen = "/userDocumentScreen";
-  static const String libraryScreen = "/libraryScreen";
+  static const String userDocumentRoute = "/userDocumentScreen";
+  static const String libraryRoute = "/libraryScreen";
   static const String resetPasswordRoute = "/resetPassword";
 }
 
@@ -41,9 +41,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const ResetPasswordView());
       case Routes.forgotPasswordRoute:
         return MaterialPageRoute(builder: (_) => const ForgotPasswordView());
-      case Routes.libraryScreen:
+      case Routes.libraryRoute:
         return MaterialPageRoute(builder: (_) => const LibraryScreen());
-      case Routes.userDocumentScreen:
+      case Routes.userDocumentRoute:
         return MaterialPageRoute(builder: (_) => const UserDocumentScreen());
 
       default:

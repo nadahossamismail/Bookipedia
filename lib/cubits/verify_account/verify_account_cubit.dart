@@ -1,6 +1,7 @@
 import 'package:bookipedia/data_layer/Api_requests/verify_account_request.dart';
 import 'package:bookipedia/data_layer/models/verify_account/verify_account_request_model.dart';
 import 'package:bookipedia/data_layer/models/verify_account/verify_account_response_model.dart';
+import 'package:bookipedia/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,12 +20,14 @@ class VerifyAccountCubit extends Cubit<VerifyAccountState> {
     response = await VerifyAccountRequest(otp).send();
 
     if (response.status == "success") {
-      saveUserToken(response);
+      saveUserToken(response.token);
       emit(VerifyAccountCompleted());
     } else {
       emit(VerifyAccountFaliure(response.status));
     }
   }
 
-  void saveUserToken(response) {}
+  void saveUserToken(token) {
+    preferences.setString('token', token);
+  }
 }

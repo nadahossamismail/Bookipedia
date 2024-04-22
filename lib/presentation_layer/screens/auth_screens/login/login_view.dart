@@ -45,7 +45,7 @@ class _LoginViewState extends State<LoginView> {
       child: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginCompleted) {
-            Navigator.of(context).pushReplacementNamed(Routes.homeRoute);
+            Navigator.of(context).pushReplacementNamed(Routes.libraryRoute);
           } else if (state is LoginFailure) {
             AppAlertDialog.showAlert(context, state.message);
           }
