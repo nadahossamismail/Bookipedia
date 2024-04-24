@@ -43,46 +43,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // SizedBox(
-          //   height: MediaQuery.of(context).size.height / 22,
-          //   child: const HorizintalScrollList(
-          //     padding: 10,
-          //     item: Text(
-          //       'Category',
-          //       style: TextStyle(fontSize: 15, color: Colors.white),
-          //     ),
-          //     itemscount: 10,
-          //   ),
-          // ),
           const SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
-            child: InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, Routes.userDocumentRoute);
-              },
-              child: Row(
-                children: [
-                  Text(
-                    'Your Documents',
-                    style: AppTextStyle.title.copyWith(color: Colors.white),
-                  ),
-                  const Spacer(),
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                  )
-                ],
-              ),
-            ),
-          ),
-          const Gap(10),
-          const NotFoundGif(),
-          const Gap(30),
           Padding(
             padding: const EdgeInsetsDirectional.only(start: 10),
             child: Text(
-              'Trending Books',
+              'Library',
               style: AppTextStyle.title.copyWith(color: Colors.white),
             ),
           ),
