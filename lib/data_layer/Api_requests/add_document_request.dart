@@ -1,8 +1,7 @@
 import 'dart:io';
-
 import 'package:bookipedia/app/api_constants.dart';
+import 'package:bookipedia/data_layer/models/add_document/add_document_response.dart';
 import 'package:bookipedia/data_layer/network/dio_factory.dart';
-import 'package:bookipedia/main.dart';
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 
@@ -10,24 +9,28 @@ class AddDocumentRequest {
   final File doc;
 
   AddDocumentRequest({required this.doc});
-  documentToJson() async {
-    final String newPath = doc.path.split('/').last;
+  Future<FormData> documentToJson() async {
+    final String fileName = doc.path.split('/').last;
     var data = FormData.fromMap({
       'file': await MultipartFile.fromFile(doc.path,
-          filename: newPath, contentType: MediaType('document', 'pdf'))
+          filename: fileName, contentType: MediaType('application', 'pdf')),
+      "type": "application/pdf"
     });
     return data;
   }
 
-  sendRequest() async {
+  Future<AddDocumentResponse> sendRequest() async {
     final dio = DioFactory.getDio();
-    var data = documentToJson();
+    var data = await documentToJson();
+    AddDocumentResponse addDocumentResponse;
     try {
       var response = await dio.post(ApiEndpoints.addDocument,
           data: data, options: Options(headers: ApiHeaders.tokenHeader));
-      return response.data;
+
+      addDocumentResponse = AddDocumentResponse.fromJson(response.data);
+      return addDocumentResponse;
     } on DioException catch (e) {
-      print(e.response);
+      return AddDocumentResponse.empty();
     }
   }
 }
