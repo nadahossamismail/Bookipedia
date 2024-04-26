@@ -28,5 +28,6 @@ class LoginCubit extends Cubit<LoginState> {
 
   void saveToken(token) {
     preferences.setString('token', token);
+    print("token: $token");
   }
 }
