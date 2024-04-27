@@ -18,7 +18,8 @@ class LoginResponse {
         token: json["token"],
       );
 
-  factory LoginResponse.empty([status = "something went wrong"]) =>
+  factory LoginResponse.empty(
+          {status = "Please check your internet connection"}) =>
       LoginResponse(
         status: status,
         user: User(

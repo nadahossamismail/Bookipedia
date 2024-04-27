@@ -69,14 +69,6 @@ class SignUpViewModel {
         passwordConfirm: confirmPasswordController.text);
   }
 
-  void signUpCubitListner(state, context) {
-    if (state is SignUpFailure) {
-      return AppAlertDialog.showAlert(context, state.message);
-    } else if (state is SignUpCompleted) {
-      return goToVerifyAccount(context);
-    }
-  }
-
   void goToVerifyAccount(context) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (_) => VerifyAccountView(emailController.text)));

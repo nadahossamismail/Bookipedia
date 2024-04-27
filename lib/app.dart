@@ -1,7 +1,9 @@
 import 'package:bookipedia/app/app_routes.dart';
+import 'package:bookipedia/app/style/app_colors.dart';
 import 'package:bookipedia/app/style/app_theme.dart';
 
 import 'package:bookipedia/presentation_layer/screens/auth_screens/login/login_view.dart';
+import 'package:bookipedia/presentation_layer/screens/pdf_view/pdf_viewer.dart';
 
 import 'package:flutter/material.dart';
 

@@ -2,6 +2,7 @@ import 'package:bookipedia/app/api_constants.dart';
 import 'package:bookipedia/data_layer/models/login/login_request_model.dart';
 import 'package:bookipedia/data_layer/models/login/login_response_model.dart';
 import 'package:bookipedia/data_layer/network/dio_factory.dart';
+import 'package:bookipedia/data_layer/network/enum_handler.dart';
 import 'package:dio/dio.dart';
 
 class LoginRequest {
@@ -20,14 +21,8 @@ class LoginRequest {
 
       return loginResponse;
     } catch (error) {
-      if (error is DioException) {
-        if (error.response!.statusCode == 401) {
-          return LoginResponse.empty(
-              "Not registered, please create an account");
-        }
-        return LoginResponse.empty();
-      }
+      var handler = ErrorHandler.handle(error);
+      return LoginResponse.empty(status: handler.failure.message);
     }
-    return LoginResponse.empty();
   }
 }
