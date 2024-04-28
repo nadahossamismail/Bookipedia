@@ -117,6 +117,8 @@ Failure _handleError(DioException error) {
       } else {
         return DataSource.NOT_FOUND.getFailure();
       }
+    case DioException.connectionError:
+      return DataSource.CONNECT_TIMEOUT.getFailure();
     case DioExceptionType.cancel:
       return DataSource.CANCEL.getFailure();
     default:

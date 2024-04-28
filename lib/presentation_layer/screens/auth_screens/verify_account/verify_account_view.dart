@@ -2,7 +2,7 @@ import 'package:bookipedia/app/app_routes.dart';
 import 'package:bookipedia/cubits/resend_verifivation/resend_verification_cubit.dart';
 import 'package:bookipedia/cubits/verify_account/verify_account_cubit.dart';
 import 'package:bookipedia/presentation_layer/screens/auth_screens/verify_account/verify_account_viewmodel.dart';
-import 'package:bookipedia/presentation_layer/widgets/Loading.dart';
+import 'package:bookipedia/presentation_layer/widgets/loading.dart';
 import 'package:bookipedia/presentation_layer/widgets/alert_dialog.dart';
 import 'package:bookipedia/presentation_layer/widgets/material_button.dart';
 import 'package:bookipedia/presentation_layer/widgets/pinput.dart';

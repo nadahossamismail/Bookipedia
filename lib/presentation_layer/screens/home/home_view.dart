@@ -47,7 +47,7 @@ class HomeView extends StatelessWidget {
                 ),
               ),
             ),
-            const Gap(10),
+            const Gap(50),
             const NotFoundGif(),
           ],
         ),

@@ -4,7 +4,7 @@ import 'package:bookipedia/app/style/app_text_style.dart';
 import 'package:bookipedia/cubits/login/login_cubit.dart';
 import 'package:bookipedia/cubits/visibility_icon/visibility_cubit.dart';
 import 'package:bookipedia/presentation_layer/screens/auth_screens/login/login_viewmodel.dart';
-import 'package:bookipedia/presentation_layer/widgets/Loading.dart';
+import 'package:bookipedia/presentation_layer/widgets/loading.dart';
 import 'package:bookipedia/presentation_layer/widgets/alert_dialog.dart';
 import 'package:bookipedia/presentation_layer/widgets/material_button.dart';
 import 'package:bookipedia/presentation_layer/widgets/switch_auth_method.dart';
