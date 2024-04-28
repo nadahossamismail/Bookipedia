@@ -25,10 +25,7 @@ class SignUpRequest {
           return SignUpResponse(
               status: "duplicate", message: "This email already exists!");
         }
-        if (error.type == DioExceptionType.connectionTimeout) {
-          return SignUpResponse(
-              status: "time out", message: "Check your internet connection");
-        }
+
       }
       return SignUpResponse.empty();
     }

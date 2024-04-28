@@ -41,6 +41,7 @@ class _SignUpState extends State<SignUp> {
       ],
       child: BlocConsumer<SignUpCubit, SignUpState>(
         listener: signUpViewModel.listener,
+
         builder: (context, state) {
           return Scaffold(
             body: GestureDetector(

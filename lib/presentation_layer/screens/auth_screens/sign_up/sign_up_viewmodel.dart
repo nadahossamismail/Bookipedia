@@ -69,6 +69,7 @@ class SignUpViewModel {
         passwordConfirm: confirmPasswordController.text);
   }
 
+
   void listener(context, state) {
     if (state is SignUpFailure) {
       AppAlertDialog.showAlert(context, state.message);
@@ -76,6 +77,7 @@ class SignUpViewModel {
       goToVerifyAccount(context);
     }
   }
+
 
   void goToVerifyAccount(context) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
