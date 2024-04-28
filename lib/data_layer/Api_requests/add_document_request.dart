@@ -24,8 +24,11 @@ class AddDocumentRequest {
     var data = await documentToJson();
     AddDocumentResponse addDocumentResponse;
     try {
-      var response = await dio.post(ApiEndpoints.addDocument,
-          data: data, options: Options(headers: ApiHeaders.tokenHeader));
+      var response = await dio.post(
+        ApiEndpoints.addDocument,
+        options: Options(headers: ApiHeaders.tokenHeader),
+        data: data,
+      );
 
       addDocumentResponse = AddDocumentResponse.fromJson(response.data);
       return addDocumentResponse;

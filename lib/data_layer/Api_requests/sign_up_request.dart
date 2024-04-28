@@ -25,6 +25,7 @@ class SignUpRequest {
           return SignUpResponse(
               status: "duplicate", message: "This email already exists!");
         }
+
       }
       return SignUpResponse.empty();
     }

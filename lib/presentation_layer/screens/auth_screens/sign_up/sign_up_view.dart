@@ -3,8 +3,7 @@ import 'package:bookipedia/app/style/app_text_style.dart';
 import 'package:bookipedia/cubits/sign_up/sign_up_cubit.dart';
 import 'package:bookipedia/cubits/visibility_icon/visibility_cubit.dart';
 import 'package:bookipedia/presentation_layer/screens/auth_screens/sign_up/sign_up_viewmodel.dart';
-import 'package:bookipedia/presentation_layer/widgets/Loading.dart';
-import 'package:bookipedia/presentation_layer/widgets/alert_dialog.dart';
+import 'package:bookipedia/presentation_layer/widgets/loading.dart';
 import 'package:bookipedia/presentation_layer/widgets/material_button.dart';
 import 'package:bookipedia/presentation_layer/widgets/switch_auth_method.dart';
 import 'package:bookipedia/presentation_layer/widgets/text_form_field.dart';
@@ -41,13 +40,8 @@ class _SignUpState extends State<SignUp> {
         BlocProvider(create: (context) => VisibilityCubit()),
       ],
       child: BlocConsumer<SignUpCubit, SignUpState>(
-        listener: (state, context) {
-          if (state is SignUpFailure) {
-            return AppAlertDialog.showAlert(context, "failure");
-          } else if (state is SignUpCompleted) {
-            return signUpViewModel.goToVerifyAccount(context);
-          }
-        },
+        listener: signUpViewModel.listener,
+
         builder: (context, state) {
           return Scaffold(
             body: GestureDetector(

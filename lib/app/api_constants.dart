@@ -15,6 +15,9 @@ class ApiEndpoints {
       "/auth/resend-verification-email";
   static const String getAllBooks = "/book";
   static const String addDocument = "/document";
+  static const String getAllUserDocuments = "/document";
+  static const String deleteDocument = "/document/";
+  static const String getDocumentFile = "/document/file/";
 }
 
 class ApiHeaders {

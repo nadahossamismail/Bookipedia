@@ -1,5 +1,9 @@
+import 'package:bookipedia/cubits/UserDocument/user_document_cubit.dart';
+import 'package:bookipedia/cubits/delete_document/delete_document_cubit.dart';
+import 'package:bookipedia/cubits/documents_list/document_list_cubit.dart';
+import 'package:bookipedia/cubits/get_document_file/get_document_file_cubit.dart';
 import 'package:bookipedia/presentation_layer/screens/Library/libraryscreen.dart';
-import 'package:bookipedia/presentation_layer/screens/user_document/userdocument.dart';
+import 'package:bookipedia/presentation_layer/screens/user_document/user_document.dart';
 
 import 'package:bookipedia/presentation_layer/screens/auth_screens/forgot_password/forgot_password_view.dart';
 import 'package:bookipedia/presentation_layer/screens/auth_screens/login/login_view.dart';
@@ -9,6 +13,7 @@ import 'package:bookipedia/presentation_layer/screens/home/home_view.dart';
 import 'package:bookipedia/presentation_layer/screens/auth_screens/sign_up/sign_up_view.dart';
 import 'package:bookipedia/presentation_layer/screens/splash/splash_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Routes {
   static const String splashRoute = "/splash";
@@ -44,7 +49,16 @@ class RouteGenerator {
       case Routes.libraryRoute:
         return MaterialPageRoute(builder: (_) => const LibraryScreen());
       case Routes.userDocumentRoute:
-        return MaterialPageRoute(builder: (_) => const UserDocumentScreen());
+        return MaterialPageRoute(
+            builder: (_) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(create: (context) => UserDocumentCubit()),
+                    BlocProvider(create: (context) => DocumentListCubit()),
+                    BlocProvider(create: (context) => DeleteDocumentCubit()),
+                    BlocProvider(create: (context) => GetDocumentFileCubit()),
+                  ],
+                  child: const UserDocumentScreen(),
+                ));
 
       default:
         return undefinedRoute();
