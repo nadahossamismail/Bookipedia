@@ -1,14 +1,12 @@
-import 'package:bookipedia/cubits/UserDocument/user_document_cubit.dart';
+import 'package:bookipedia/cubits/user_document/user_document_cubit.dart';
 import 'package:bookipedia/cubits/delete_document/delete_document_cubit.dart';
 import 'package:bookipedia/cubits/documents_list/document_list_cubit.dart';
 import 'package:bookipedia/cubits/get_document_file/get_document_file_cubit.dart';
 import 'package:bookipedia/presentation_layer/screens/Library/libraryscreen.dart';
 import 'package:bookipedia/presentation_layer/screens/user_document/user_document.dart';
-
 import 'package:bookipedia/presentation_layer/screens/auth_screens/forgot_password/forgot_password_view.dart';
 import 'package:bookipedia/presentation_layer/screens/auth_screens/login/login_view.dart';
 import 'package:bookipedia/presentation_layer/screens/auth_screens/reset_password/reset_password_view.dart';
-
 import 'package:bookipedia/presentation_layer/screens/home/home_view.dart';
 import 'package:bookipedia/presentation_layer/screens/auth_screens/sign_up/sign_up_view.dart';
 import 'package:bookipedia/presentation_layer/screens/splash/splash_view.dart';

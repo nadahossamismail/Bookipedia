@@ -1,5 +1,6 @@
 import 'package:bookipedia/data_layer/Api_requests/get_user_documents_request.dart';
-import 'package:bookipedia/data_layer/models/get_document_list/document_list_response.dart';
+import 'package:bookipedia/data_layer/models/add_document/add_document_response.dart';
+import 'package:bookipedia/data_layer/models/user_documents/document_list_response.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'document_list_state.dart';
 
@@ -9,6 +10,7 @@ class DocumentListCubit extends Cubit<DocumentListState> {
   static DocumentListCubit get(context) => BlocProvider.of(context);
 
   List<Document> documentList = [];
+
   void sendRequest() async {
     GetUserDocumentsResponse response;
 

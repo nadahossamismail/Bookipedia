@@ -133,11 +133,8 @@ class ErrorHandler implements Exception {
 
   ErrorHandler.handle(dynamic error) {
     if (error is DioException) {
-      // dio error so its an error from response of the API or from dio itself
-      print("from handle:${error.type}");
       failure = _handleError(error);
     } else {
-      // default error
       failure = DataSource.DEFAULT.getFailure();
     }
   }

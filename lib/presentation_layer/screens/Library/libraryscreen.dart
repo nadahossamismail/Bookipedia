@@ -1,14 +1,9 @@
-import 'package:bookipedia/app/app_routes.dart';
 import 'package:bookipedia/app/style/app_colors.dart';
 import 'package:bookipedia/app/style/app_text_style.dart';
 import 'package:bookipedia/data_layer/models/BooksModel/allbooks_model.dart';
 import 'package:bookipedia/presentation_layer/screens/Library/library_viewmodel.dart';
 import 'package:bookipedia/presentation_layer/widgets/horizintalscroll.dart';
-import 'package:bookipedia/presentation_layer/widgets/notfoundgif.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:gap/gap.dart';
 
 class LibraryScreen extends StatefulWidget {
   const LibraryScreen({super.key});
