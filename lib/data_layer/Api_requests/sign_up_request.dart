@@ -2,7 +2,6 @@ import 'package:bookipedia/app/api_constants.dart';
 import 'package:bookipedia/data_layer/network/dio_factory.dart';
 import 'package:bookipedia/data_layer/models/sign_up/sign_up_request_model.dart';
 import 'package:bookipedia/data_layer/models/sign_up/sign_up_response_model.dart';
-import 'package:bookipedia/data_layer/network/enum_handler.dart';
 import 'package:dio/dio.dart';
 
 class SignUpRequest {
@@ -25,7 +24,6 @@ class SignUpRequest {
           return SignUpResponse(
               status: "duplicate", message: "This email already exists!");
         }
-
       }
       return SignUpResponse.empty();
     }

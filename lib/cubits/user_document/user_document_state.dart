@@ -6,4 +6,8 @@ final class UserDocumentLoading extends UserDocumentState {}
 
 final class UserDocumentDone extends UserDocumentState {}
 
-final class UserDocumentFailed extends UserDocumentState {}
+final class UserDocumentFailed extends UserDocumentState {
+  final String message;
+
+  UserDocumentFailed({required this.message});
+}

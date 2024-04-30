@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:bookipedia/app/api_constants.dart';
 import 'package:bookipedia/data_layer/models/add_document/add_document_response.dart';
 import 'package:bookipedia/data_layer/network/dio_factory.dart';
+import 'package:bookipedia/data_layer/network/enum_handler.dart';
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 
@@ -32,8 +33,9 @@ class AddDocumentRequest {
 
       addDocumentResponse = AddDocumentResponse.fromJson(response.data);
       return addDocumentResponse;
-    } on DioException catch (e) {
-      return AddDocumentResponse.empty();
+    } catch (error) {
+      var handler = ErrorHandler.handle(error);
+      return AddDocumentResponse.empty(handler.failure.message);
     }
   }
 }

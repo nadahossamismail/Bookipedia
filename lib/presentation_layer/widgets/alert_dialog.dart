@@ -26,16 +26,16 @@ class AppAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-        buttonPadding: const EdgeInsets.symmetric(horizontal: 12),
         actionsAlignment: MainAxisAlignment.center,
         contentPadding: const EdgeInsets.symmetric(
-            vertical: AppSpacingSizing.s32, horizontal: 24),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            vertical: AppSpacingSizing.s24, horizontal: 24),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSpacingSizing.s16)),
         content: Text(
           message,
           textAlign: TextAlign.center,
           style: const TextStyle(
-              fontSize: FontSize.f20, fontWeight: FontWeight.w400),
+              fontSize: FontSize.f18, fontWeight: FontWeight.w500),
         ),
         actions: [
           isOneOption
@@ -43,14 +43,22 @@ class AppAlertDialog extends StatelessWidget {
                   onPressed: () => Navigator.of(context).pop(),
                   title: "OK",
                   color: ColorManager.primary)
-              : ActionButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  title: "cancle",
-                  color: Colors.grey),
-          ActionButton(
-              onPressed: () => onAction,
-              title: actionTitle ?? "OK",
-              color: ColorManager.primary)
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ActionButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        title: "cancle",
+                        color: Colors.grey),
+                    const SizedBox(
+                      width: 12,
+                    ),
+                    ActionButton(
+                        onPressed: onAction ?? () {},
+                        title: actionTitle ?? "OK",
+                        color: ColorManager.primary)
+                  ],
+                ),
         ]);
   }
 }
@@ -71,6 +79,7 @@ class ActionButton extends StatelessWidget {
     return MaterialButton(
         shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(10)),
         onPressed: onPressed,
-        child: Text(title, style: TextStyle(fontSize: 20, color: color)));
+        child: Text(title,
+            style: TextStyle(fontSize: FontSize.f20, color: color)));
   }
 }
