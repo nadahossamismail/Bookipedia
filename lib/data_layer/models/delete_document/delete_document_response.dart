@@ -1,3 +1,5 @@
+import 'package:bookipedia/app/app_strings.dart';
+
 DeleteDocumentResponse deleteDocumentResponseFromJson(
         Map<String, dynamic> json) =>
     DeleteDocumentResponse.fromJson(json);
@@ -12,7 +14,7 @@ class DeleteDocumentResponse {
   });
 
   factory DeleteDocumentResponse.empty(message) => DeleteDocumentResponse(
-        status: "faliure",
+        status: AppStrings.failure,
         message: message,
       );
 

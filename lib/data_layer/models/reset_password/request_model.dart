@@ -1,14 +1,14 @@
 import 'dart:convert';
 
-String resetPasswordRequestBodyDartToJson(ResetPasswordRequestBodyDart data) =>
+String resetPasswordRequestBodyToJson(ResetPasswordRequestBody data) =>
     json.encode(data.toJson());
 
-class ResetPasswordRequestBodyDart {
+class ResetPasswordRequestBody {
   final String otp;
   final String password;
   final String passwordConfirm;
 
-  ResetPasswordRequestBodyDart({
+  ResetPasswordRequestBody({
     required this.otp,
     required this.password,
     required this.passwordConfirm,

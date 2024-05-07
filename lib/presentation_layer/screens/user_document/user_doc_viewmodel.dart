@@ -1,4 +1,5 @@
 import 'package:bookipedia/app/style/app_text_style.dart';
+import 'package:bookipedia/cubits/get_document_file/get_document_file_cubit.dart';
 import 'package:bookipedia/cubits/user_document/user_document_state.dart';
 import 'package:bookipedia/cubits/delete_document/delete_document_cubit.dart';
 import 'package:bookipedia/cubits/documents_list/document_list_cubit.dart';
@@ -8,8 +9,8 @@ import 'package:bookipedia/presentation_layer/widgets/card.dart';
 import 'package:bookipedia/presentation_layer/widgets/empty_list.dart';
 import 'package:bookipedia/presentation_layer/widgets/loading.dart';
 import 'package:bookipedia/presentation_layer/widgets/snack_bar.dart';
+import 'package:bookipedia/presentation_layer/widgets/something_went_wrong.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserDocsViewModel {
   Widget viewBody({
@@ -27,7 +28,8 @@ class UserDocsViewModel {
     } else if (documentListState is DocumentListCompleted) {
       return showDocumentsList(documentList);
     }
-    return somethingWentWrong();
+    return SomethingWentWrong(
+        onPressed: () => DocumentListCubit.get(context).sendRequest());
   }
 
   Widget showDocumentsList(documentList) {
@@ -61,14 +63,16 @@ class UserDocsViewModel {
     var title = doc.title;
     var titleWithoutExtension = title.substring(0, title.length - 4);
     return InkWell(
-        onTap: () => diplayDocument(doc.id),
+        onTap: () => diplayDocument(doc, context),
         child: AppCard(
           title: titleWithoutExtension,
           onIconPressed: () => confirmDeletion(context, documentList, index),
         ));
   }
 
-  void diplayDocument(id) {}
+  void diplayDocument(Document doc, context) async {
+    GetDocumentFileCubit.get(context).sendRequest(doc);
+  }
 
   void confirmDeletion(context, documentList, index) {
     Document item = documentList[index];
@@ -83,13 +87,5 @@ class UserDocsViewModel {
                   .sendRequest(id: item.id, index: index);
               Navigator.of(context).pop();
             }));
-  }
-
-  Widget somethingWentWrong() {
-    return const Center(
-        child: Text(
-      "Something went wrong",
-      style: TextStyle(fontSize: FontSize.f18),
-    ));
   }
 }

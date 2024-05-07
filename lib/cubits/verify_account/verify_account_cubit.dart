@@ -1,5 +1,5 @@
+import 'package:bookipedia/app/app_strings.dart';
 import 'package:bookipedia/data_layer/Api_requests/verify_account_request.dart';
-import 'package:bookipedia/data_layer/models/verify_account/verify_account_request_model.dart';
 import 'package:bookipedia/data_layer/models/verify_account/verify_account_response_model.dart';
 import 'package:bookipedia/main.dart';
 import 'package:flutter/material.dart';
@@ -12,14 +12,14 @@ class VerifyAccountCubit extends Cubit<VerifyAccountState> {
 
   static VerifyAccountCubit get(context) => BlocProvider.of(context);
 
-  void sendRequest(VerifyAccountRequestBody otp) async {
+  void sendRequest(String otp) async {
     VerifyAccountResponse response;
 
     emit(VerifyAccountLoading());
 
     response = await VerifyAccountRequest(otp).send();
 
-    if (response.status == "success") {
+    if (response.status == AppStrings.success) {
       saveUserToken(response.token);
       emit(VerifyAccountCompleted());
     } else {

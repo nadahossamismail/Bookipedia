@@ -1,3 +1,4 @@
+import 'package:bookipedia/app/app_strings.dart';
 import 'package:bookipedia/data_layer/Api_requests/login_request.dart';
 import 'package:bookipedia/data_layer/models/login/login_request_model.dart';
 import 'package:bookipedia/data_layer/models/login/login_response_model.dart';
@@ -18,9 +19,13 @@ class LoginCubit extends Cubit<LoginState> {
 
     response = await LoginRequest(userData).send();
 
-    if (response.status == "success") {
-      saveToken(response.token);
-      emit(LoginCompleted());
+    if (response.status == AppStrings.success) {
+      if (response.user.authenticated) {
+        saveToken(response.token);
+        emit(LoginCompleted());
+      } else {
+        emit(LoginToVerify(response.user.email));
+      }
     } else {
       emit(LoginFailure(response.status));
     }

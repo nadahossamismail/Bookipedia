@@ -1,4 +1,5 @@
-import 'package:bookipedia/app/error_messages.dart';
+import 'package:bookipedia/app/app_strings.dart';
+
 import 'package:bookipedia/cubits/sign_up/sign_up_cubit.dart';
 import 'package:bookipedia/data_layer/models/sign_up/sign_up_request_model.dart';
 import 'package:bookipedia/presentation_layer/screens/auth_screens/verify_account/verify_account_view.dart';
@@ -29,34 +30,34 @@ class SignUpViewModel {
 
   String? validateUserName(String? username) {
     if (username == null || username.isEmpty) {
-      return ErrorMessages().emptyField;
+      return AppStrings.emptyField;
     }
     return null;
   }
 
   String? validateEmail(String? email) {
     if (email == null || email.isEmpty) {
-      return ErrorMessages().emptyField;
+      return AppStrings.emptyField;
     } else if (!email.contains("@")) {
-      return "Not Vaild";
+      return AppStrings.notValid;
     }
     return null;
   }
 
   String? validatePassword(String? password) {
     if (password == null || password.isEmpty) {
-      return ErrorMessages().emptyField;
+      return AppStrings.emptyField;
     } else if (password.length < 8) {
-      return "Password is too short";
+      return AppStrings.passwordTooShort;
     }
     return null;
   }
 
   String? validateConfirmPassword(String? password) {
     if (password == null || password.isEmpty) {
-      return ErrorMessages().emptyField;
+      return AppStrings.emptyField;
     } else if (password.compareTo(passwordController.text) != 0) {
-      return "Not matched";
+      return AppStrings.notMatched;
     }
     return null;
   }
@@ -69,7 +70,6 @@ class SignUpViewModel {
         passwordConfirm: confirmPasswordController.text);
   }
 
-
   void listener(context, state) {
     if (state is SignUpFailure) {
       AppAlertDialog.showAlert(context, state.message);
@@ -78,11 +78,10 @@ class SignUpViewModel {
     }
   }
 
-
   void goToVerifyAccount(context) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (_) => VerifyAccountView(emailController.text)));
-    AppSnackBar.showSnackBar(context, "Check your mail!");
+    AppSnackBar.showSnackBar(context, "Check your email!");
   }
 
   void signUp(context) {

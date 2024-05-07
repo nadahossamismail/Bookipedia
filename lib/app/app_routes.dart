@@ -39,7 +39,13 @@ class RouteGenerator {
       // case Routes.verifyAccountRoute:
       //   return MaterialPageRoute(builder: (_) => const VerifyAccountView());
       case Routes.homeRoute:
-        return MaterialPageRoute(builder: (_) => const HomeView());
+        return MaterialPageRoute(
+            builder: (_) => MultiBlocProvider(providers: [
+                  BlocProvider(create: (context) => UserDocumentCubit()),
+                  BlocProvider(create: (context) => DocumentListCubit()),
+                  BlocProvider(create: (context) => DeleteDocumentCubit()),
+                  BlocProvider(create: (context) => GetDocumentFileCubit()),
+                ], child: const HomeView()));
       case Routes.resetPasswordRoute:
         return MaterialPageRoute(builder: (_) => const ResetPasswordView());
       case Routes.forgotPasswordRoute:
@@ -47,16 +53,7 @@ class RouteGenerator {
       case Routes.libraryRoute:
         return MaterialPageRoute(builder: (_) => const LibraryScreen());
       case Routes.userDocumentRoute:
-        return MaterialPageRoute(
-            builder: (_) => MultiBlocProvider(
-                  providers: [
-                    BlocProvider(create: (context) => UserDocumentCubit()),
-                    BlocProvider(create: (context) => DocumentListCubit()),
-                    BlocProvider(create: (context) => DeleteDocumentCubit()),
-                    BlocProvider(create: (context) => GetDocumentFileCubit()),
-                  ],
-                  child: const UserDocumentScreen(),
-                ));
+        return MaterialPageRoute(builder: (_) => const UserDocumentScreen());
 
       default:
         return undefinedRoute();

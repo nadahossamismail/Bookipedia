@@ -4,6 +4,7 @@ import 'package:bookipedia/app/style/app_text_style.dart';
 import 'package:bookipedia/cubits/login/login_cubit.dart';
 import 'package:bookipedia/cubits/visibility_icon/visibility_cubit.dart';
 import 'package:bookipedia/presentation_layer/screens/auth_screens/login/login_viewmodel.dart';
+import 'package:bookipedia/presentation_layer/screens/auth_screens/verify_account/verify_account_view.dart';
 import 'package:bookipedia/presentation_layer/widgets/loading.dart';
 import 'package:bookipedia/presentation_layer/widgets/alert_dialog.dart';
 import 'package:bookipedia/presentation_layer/widgets/material_button.dart';
@@ -48,6 +49,11 @@ class _LoginViewState extends State<LoginView> {
             Navigator.of(context).pushReplacementNamed(Routes.homeRoute);
           } else if (state is LoginFailure) {
             AppAlertDialog.showAlert(context, state.message);
+          } else if (state is LoginToVerify) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => VerifyAccountView(state.userEmail)));
           }
         },
         builder: (context, state) => Scaffold(

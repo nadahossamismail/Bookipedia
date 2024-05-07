@@ -1,3 +1,5 @@
+import 'package:bookipedia/app/app_strings.dart';
+
 SignUpResponse signUpResponseFromJson(Map<String, dynamic> json) =>
     SignUpResponse.fromJson(json);
 
@@ -10,9 +12,9 @@ class SignUpResponse {
     required this.message,
   });
 
-  factory SignUpResponse.empty() => SignUpResponse(
-        status: "faliure",
-        message: "something went wrong",
+  factory SignUpResponse.empty(message) => SignUpResponse(
+        status: AppStrings.failure,
+        message: message,
       );
 
   factory SignUpResponse.fromJson(Map<String, dynamic> json) => SignUpResponse(

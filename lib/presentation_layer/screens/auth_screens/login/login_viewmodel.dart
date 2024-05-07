@@ -1,4 +1,4 @@
-import 'package:bookipedia/app/error_messages.dart';
+import 'package:bookipedia/app/app_strings.dart';
 import 'package:bookipedia/cubits/login/login_cubit.dart';
 import 'package:bookipedia/data_layer/models/login/login_request_model.dart';
 import 'package:flutter/material.dart';
@@ -20,16 +20,16 @@ class LoginViewModel {
 
   String? validateEmail(email) {
     if (email == null || email.isEmpty) {
-      return ErrorMessages().emptyField;
+      return AppStrings.emptyField;
     } else if (!email.contains("@")) {
-      return "Not Vaild";
+      return AppStrings.notValid;
     }
     return null;
   }
 
   String? validatePassword(password) {
     if (password == null || password.isEmpty) {
-      return ErrorMessages().emptyField;
+      return AppStrings.emptyField;
     }
     return null;
   }

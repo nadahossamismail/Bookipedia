@@ -1,7 +1,9 @@
 import 'package:bookipedia/app/api_constants.dart';
+import 'package:bookipedia/app/app_strings.dart';
 import 'package:bookipedia/data_layer/network/dio_factory.dart';
 import 'package:bookipedia/data_layer/models/sign_up/sign_up_request_model.dart';
 import 'package:bookipedia/data_layer/models/sign_up/sign_up_response_model.dart';
+import 'package:bookipedia/data_layer/network/enum_handler.dart';
 import 'package:dio/dio.dart';
 
 class SignUpRequest {
@@ -19,13 +21,10 @@ class SignUpRequest {
       signUpResponse = SignUpResponse.fromJson(response.data);
       return signUpResponse;
     } catch (error) {
-      if (error is DioException) {
-        if (error.response!.statusCode == 500) {
-          return SignUpResponse(
-              status: "duplicate", message: "This email already exists!");
-        }
-      }
-      return SignUpResponse.empty();
+      var failure = ErrorHandler.handle(error).failure;
+      var message =
+          failure.code == 500 ? AppStrings.emailExists : failure.message;
+      return SignUpResponse.empty(message);
     }
   }
 }

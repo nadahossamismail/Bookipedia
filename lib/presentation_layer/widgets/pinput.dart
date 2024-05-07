@@ -12,7 +12,6 @@ class AppPinput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Pinput(
         length: 6,
-        onSubmitted: onComplete,
         controller: controller,
         onCompleted: onComplete,
         defaultPinTheme: PinTheme(

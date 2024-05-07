@@ -37,13 +37,13 @@ class LoginResponse {
 
 class User {
   final String id;
-  final String name;
+  final String? name;
   final String email;
-  final String password;
-  final String createdAt;
+  final String? password;
+  final String? createdAt;
   final bool authenticated;
-  final String passwordChangedAt;
-  final int v;
+  final String? passwordChangedAt;
+  final int? v;
 
   User({
     required this.id,

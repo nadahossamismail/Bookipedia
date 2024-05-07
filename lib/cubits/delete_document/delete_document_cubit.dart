@@ -1,3 +1,4 @@
+import 'package:bookipedia/app/app_strings.dart';
 import 'package:bookipedia/data_layer/Api_requests/delete_document_request.dart';
 import 'package:bookipedia/data_layer/models/delete_document/delete_document_response.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +15,7 @@ class DeleteDocumentCubit extends Cubit<DeleteDocumentState> {
 
     response = await DeleteDocumentRequest(id).send();
 
-    if (response.status == "success") {
+    if (response.status == AppStrings.success) {
       emit(DeleteDocumentCompleted());
     } else {
       emit(DeleteDocumentFailure(response.message));
