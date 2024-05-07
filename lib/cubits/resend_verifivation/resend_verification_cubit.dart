@@ -1,3 +1,4 @@
+import 'package:bookipedia/app/app_strings.dart';
 import 'package:bookipedia/data_layer/Api_requests/resend_verification_request.dart';
 import 'package:bookipedia/data_layer/models/resend_verification/resend_verification_request_model.dart';
 import 'package:bookipedia/data_layer/models/resend_verification/resend_verification_response_model.dart';
@@ -18,7 +19,7 @@ class ResendVerificationCubit extends Cubit<ResendVerificationState> {
 
     response = await ResendVerificationRequest(email).send();
 
-    if (response.status == "success") {
+    if (response.status == AppStrings.success) {
       emit(ResendVerificationCompleted());
     } else {
       emit(ResendVerificationFailure());

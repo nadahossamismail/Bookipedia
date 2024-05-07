@@ -34,21 +34,20 @@ class _VerifyAccountViewState extends State<VerifyAccountView>
     super.dispose();
   }
 
-  bool value = false;
+  bool isFinished = false;
 
   bool canResend() {
     VerifyAccountViewModel.timerController.addListener(() {
       setState(() {
-        value = VerifyAccountViewModel.timerController.state.value ==
+        isFinished = VerifyAccountViewModel.timerController.state.value ==
             CustomTimerState.finished;
       });
     });
-    return value;
+    return isFinished;
   }
 
   @override
   Widget build(BuildContext context) {
-    VerifyAccountViewModel? verifyAccountViewModel;
     return MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => VerifyAccountCubit()),
@@ -64,6 +63,7 @@ class _VerifyAccountViewState extends State<VerifyAccountView>
           },
           builder: (context, state) {
             return Scaffold(
+              appBar: AppBar(),
               body: SafeArea(
                 child: SingleChildScrollView(
                   child: Container(
@@ -84,8 +84,8 @@ class _VerifyAccountViewState extends State<VerifyAccountView>
                         const SizedBox(height: AppSpacingSizing.s24),
                         AppPinput(
                             controller: VerifyAccountViewModel.pinputController,
-                            onComplete: (otp) => verifyAccountViewModel =
-                                VerifyAccountViewModel(otp: otp)),
+                            onComplete: (otp) =>
+                                VerifyAccountViewModel.otp = otp),
                         const SizedBox(height: AppSpacingSizing.s24),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -115,7 +115,7 @@ class _VerifyAccountViewState extends State<VerifyAccountView>
                               VerifyAccountViewModel.onResendComplete(context);
                             } else if (state is ResendVerificationFailure) {
                               setState(() {
-                                value = true;
+                                isFinished = true;
                               });
                               AppAlertDialog.showAlert(
                                   context, "Please try again later");
@@ -139,7 +139,7 @@ class _VerifyAccountViewState extends State<VerifyAccountView>
                                 : null,
                             onPressed: () =>
                                 VerifyAccountViewModel.submitVerificationLogic(
-                                    verifyAccountViewModel, context, state))
+                                    context, state))
                       ],
                     ),
                   ),

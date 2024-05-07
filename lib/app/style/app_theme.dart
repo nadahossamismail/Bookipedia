@@ -5,10 +5,9 @@ class ThemeManger {
   ThemeData getApplicationTheme() {
     return ThemeData(
       primaryColor: ColorManager.primary,
-      colorScheme: ColorScheme.fromSeed(seedColor: ColorManager.primary),
-      cardTheme: const CardTheme(),
-      textButtonTheme: const TextButtonThemeData(),
-      elevatedButtonTheme: const ElevatedButtonThemeData(),
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: ColorManager.primary,
+      ),
     );
   }
 }

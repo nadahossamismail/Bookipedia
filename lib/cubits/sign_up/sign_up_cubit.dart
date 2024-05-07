@@ -1,3 +1,4 @@
+import 'package:bookipedia/app/app_strings.dart';
 import 'package:bookipedia/data_layer/Api_requests/sign_up_request.dart';
 import 'package:bookipedia/data_layer/models/sign_up/sign_up_request_model.dart';
 import 'package:bookipedia/data_layer/models/sign_up/sign_up_response_model.dart';
@@ -18,7 +19,7 @@ class SignUpCubit extends Cubit<SignUpState> {
 
     response = await SignUpRequest(userData).send();
 
-    if (response.status == "success") {
+    if (response.status == AppStrings.success) {
       emit(SignUpCompleted());
     } else {
       emit(SignUpFailure(response.message));

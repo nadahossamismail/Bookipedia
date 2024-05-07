@@ -1,8 +1,3 @@
-import 'dart:convert';
-
-String verifyAccountRequestModelToJson(VerifyAccountRequestBody data) =>
-    json.encode(data.toJson());
-
 class VerifyAccountRequestBody {
   final String otp;
 

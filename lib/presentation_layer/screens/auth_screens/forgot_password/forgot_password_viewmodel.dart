@@ -1,4 +1,4 @@
-import 'package:bookipedia/app/error_messages.dart';
+import 'package:bookipedia/app/app_strings.dart';
 import 'package:bookipedia/presentation_layer/screens/auth_screens/verify_account/verify_account_view.dart';
 import 'package:flutter/material.dart';
 
@@ -15,9 +15,9 @@ class ForgotPasswordViewModel {
 
   String? validateEmail(email) {
     if (email == null || email.isEmpty) {
-      return ErrorMessages().emptyField;
+      return AppStrings.emptyField;
     } else if (!email.contains("@")) {
-      return "Not Vaild";
+      return AppStrings.notValid;
     }
     return null;
   }

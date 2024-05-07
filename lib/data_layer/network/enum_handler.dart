@@ -67,6 +67,7 @@ extension DataSourceExtension on DataSource {
     switch (this) {
       case DataSource.SUCCESS:
         return Failure(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
+
       case DataSource.NO_CONTENT:
         return Failure(ResponseCode.NO_CONTENT, ResponseMessage.NO_CONTENT);
       case DataSource.BAD_REQUEST:
@@ -105,7 +106,6 @@ Failure _handleError(DioException error) {
   switch (error.type) {
     case DioExceptionType.connectionTimeout:
       return DataSource.CONNECT_TIMEOUT.getFailure();
-
     case DioExceptionType.sendTimeout:
       return DataSource.SEND_TIMEOUT.getFailure();
     case DioExceptionType.receiveTimeout:
@@ -117,10 +117,8 @@ Failure _handleError(DioException error) {
       } else {
         return DataSource.NOT_FOUND.getFailure();
       }
-
-    case DioException.connectionError:
+    case DioExceptionType.connectionError:
       return DataSource.CONNECT_TIMEOUT.getFailure();
-
     case DioExceptionType.cancel:
       return DataSource.CANCEL.getFailure();
     default:

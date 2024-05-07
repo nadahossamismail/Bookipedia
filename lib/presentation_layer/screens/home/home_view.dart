@@ -1,57 +1,73 @@
-import 'package:bookipedia/app/app_routes.dart';
-import 'package:bookipedia/app/style/app_colors.dart';
-import 'package:bookipedia/app/style/app_text_style.dart';
-import 'package:bookipedia/presentation_layer/widgets/drawer_content.dart';
-import 'package:bookipedia/presentation_layer/widgets/notfoundgif.dart';
+import 'package:bookipedia/data_layer/network/dio_factory.dart';
+import 'package:bookipedia/presentation_layer/screens/Library/libraryscreen.dart';
+import 'package:bookipedia/presentation_layer/screens/profile/profile_view.dart';
+import 'package:bookipedia/presentation_layer/screens/user_books/user_books.dart';
+import 'package:bookipedia/presentation_layer/screens/user_document/user_document.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  int currentIndex = 1;
+  var pages = [
+    const LibraryScreen(),
+    const UserDocumentScreen(),
+    const UserBooksView(),
+    const ProfileView(),
+  ];
+  List<String> pageTitle = [
+    "Library",
+    "Your documents",
+    "Your books",
+    "Profile"
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.backgroundDark,
-      appBar: AppBar(
-        backgroundColor: ColorManager.backgroundDark,
-        centerTitle: true,
-        title: const Text(
-          "Home screen",
-          style: TextStyle(fontSize: FontSize.f20, color: Colors.white),
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(pageTitle[currentIndex]),
+          actions: currentIndex == 1
+              ? [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: IconButton(
+                        onPressed: () async {
+                          var dio = DioFactory.getDio();
+                          var fileName = "flutter.pdf";
+                          await dio.download(
+                              "https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf",
+                              "/storage/emulated/0/Download/$fileName");
+                          print("downloaded");
+                        },
+                        icon: const Icon(Icons.download)),
+                  )
+                ]
+              : null,
         ),
-      ),
-      drawer: const DrawerContent(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 20, end: 20),
-              child: InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, Routes.userDocumentRoute);
-                },
-                child: Row(
-                  children: [
-                    Text(
-                      'Your Documents',
-                      style: AppTextStyle.title.copyWith(color: Colors.white),
-                    ),
-                    const Spacer(),
-                    const Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.white,
-                    )
-                  ],
-                ),
-              ),
-            ),
-            const Gap(50),
-            const NotFoundGif(),
-          ],
-        ),
-      ),
-    );
+        body: pages[currentIndex],
+        bottomNavigationBar: NavigationBar(
+            labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+            selectedIndex: currentIndex,
+            onDestinationSelected: (val) => setState(() {
+                  currentIndex = val;
+                }),
+            destinations: const [
+              NavigationDestination(
+                  icon: Icon(Icons.collections_bookmark, size: 30),
+                  label: "library"),
+              NavigationDestination(
+                  icon: Icon(Icons.picture_as_pdf, size: 30), label: "docs"),
+              NavigationDestination(
+                  icon: Icon(Icons.book, size: 30), label: "books"),
+              NavigationDestination(
+                  icon: Icon(Icons.person, size: 30), label: "profile"),
+            ]));
   }
 }

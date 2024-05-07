@@ -1,3 +1,4 @@
+import 'package:bookipedia/app/app_strings.dart';
 import 'package:bookipedia/data_layer/Api_requests/get_user_documents_request.dart';
 import 'package:bookipedia/data_layer/models/add_document/add_document_response.dart';
 import 'package:bookipedia/data_layer/models/user_documents/document_list_response.dart';
@@ -18,7 +19,7 @@ class DocumentListCubit extends Cubit<DocumentListState> {
 
     response = await GetUserDocumentsRequest().send();
 
-    if (response.status == "failure") {
+    if (response.status == AppStrings.failure) {
       emit(DocumentListFailure(response.message!));
     } else {
       documentList = response.documents;

@@ -1,4 +1,4 @@
-import 'package:bookipedia/app/error_messages.dart';
+import 'package:bookipedia/app/app_strings.dart';
 import 'package:flutter/material.dart';
 
 class ResetPasswordViewModel {
@@ -18,18 +18,18 @@ class ResetPasswordViewModel {
 
   String? validatePassword(String? password) {
     if (password == null || password.isEmpty) {
-      return ErrorMessages().emptyField;
+      return AppStrings.emptyField;
     } else if (password.length < 8) {
-      return "Password is too short";
+      return AppStrings.passwordTooShort;
     }
     return null;
   }
 
   String? validateConfirmPassword(String? password) {
     if (password == null || password.isEmpty) {
-      return ErrorMessages().emptyField;
+      return AppStrings.emptyField;
     } else if (password.compareTo(passwordController.text) != 0) {
-      return "Not matched";
+      return AppStrings.notMatched;
     }
     return null;
   }

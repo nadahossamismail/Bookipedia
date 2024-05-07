@@ -12,4 +12,9 @@ final class LoginFailure extends LoginState {
   LoginFailure(this.message);
 }
 
+final class LoginToVerify extends LoginState {
+  final String userEmail;
+  LoginToVerify(this.userEmail);
+}
+
 final class LoginCompleted extends LoginState {}

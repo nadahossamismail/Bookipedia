@@ -1,3 +1,5 @@
+import 'package:bookipedia/app/app_strings.dart';
+
 ResendVerificationResponse resendVerificationResponseFromJson(
         Map<String, dynamic> json) =>
     ResendVerificationResponse.fromJson(json);
@@ -10,8 +12,8 @@ class ResendVerificationResponse {
     required this.status,
     required this.message,
   });
-  factory ResendVerificationResponse.empty() =>
-      ResendVerificationResponse(status: "failure", message: "");
+  factory ResendVerificationResponse.empty({required message}) =>
+      ResendVerificationResponse(status: AppStrings.failure, message: message);
 
   factory ResendVerificationResponse.fromJson(Map<String, dynamic> json) =>
       ResendVerificationResponse(

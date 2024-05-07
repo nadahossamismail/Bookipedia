@@ -1,4 +1,5 @@
 import 'package:bookipedia/app/api_constants.dart';
+import 'package:bookipedia/data_layer/models/get_doc_file/get_doc_file_response.dart';
 import 'package:bookipedia/data_layer/network/dio_factory.dart';
 import 'package:bookipedia/data_layer/network/enum_handler.dart';
 import 'package:dio/dio.dart';
@@ -9,16 +10,24 @@ class GetDocumentFileRequest {
 
   GetDocumentFileRequest(this.id);
 
-  send() async {
+  Future<GetDocumentFileResponse> send() async {
     Response response;
+    GetDocumentFileResponse getDocumentFileResponse;
 
     try {
       response = await dio.get("${ApiEndpoints.getDocumentFile}$id",
-          options: Options(headers: ApiHeaders.tokenHeader));
-      print("response from file req:${response.data}");
+
+          options: Options(
+              headers: ApiHeaders.tokenHeader,
+              responseType: ResponseType.bytes));
+
+      getDocumentFileResponse = GetDocumentFileResponse(bytes: response.data);
+
+      return getDocumentFileResponse;
     } catch (error) {
       var handler = ErrorHandler.handle(error);
-      print("handler:${handler.failure.message}");
+      return GetDocumentFileResponse.empty(message: handler.failure.message);
+
     }
   }
 }

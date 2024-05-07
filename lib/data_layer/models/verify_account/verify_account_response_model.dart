@@ -12,18 +12,19 @@ class VerifyAccountResponse {
     required this.user,
     required this.token,
   });
-  factory VerifyAccountResponse.empty(status) => VerifyAccountResponse(
-      token: "",
-      status: status,
-      user: User(
-          id: "",
-          name: "",
-          email: "",
-          password: "",
-          createdAt: "",
-          authenticated: false,
-          passwordChangedAt: "",
-          v: 0));
+  factory VerifyAccountResponse.empty({required status}) =>
+      VerifyAccountResponse(
+          token: "",
+          status: status,
+          user: User(
+              id: "",
+              name: "",
+              email: "",
+              password: "",
+              createdAt: "",
+              authenticated: false,
+              passwordChangedAt: "",
+              v: 0));
 
   factory VerifyAccountResponse.fromJson(Map<String, dynamic> json) =>
       VerifyAccountResponse(
