@@ -1,5 +1,7 @@
 import 'dart:convert';
+
 import 'package:bookipedia/app/app_strings.dart';
+
 import 'package:bookipedia/data_layer/models/add_document/add_document_response.dart';
 
 GetUserDocumentsResponse documentsListDartFromJson(String str) =>
@@ -17,7 +19,9 @@ class GetUserDocumentsResponse {
       this.status,
       this.message});
   factory GetUserDocumentsResponse.empty(message) => GetUserDocumentsResponse(
+
       length: 0, documents: [], status: AppStrings.failure, message: message);
+
 
   factory GetUserDocumentsResponse.fromJson(Map<String, dynamic> json) =>
       GetUserDocumentsResponse(

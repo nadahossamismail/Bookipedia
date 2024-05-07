@@ -10,6 +10,7 @@ class GetDocumentFileCubit extends Cubit<GetDocumentFileState> {
   GetDocumentFileCubit() : super(GetDocumentFileInitial());
   static GetDocumentFileCubit get(context) => BlocProvider.of(context);
 
+
   void sendRequest(Document doc) async {
     GetDocumentFileResponse response;
     emit(GetDocumentFileLoading());
@@ -23,5 +24,6 @@ class GetDocumentFileCubit extends Cubit<GetDocumentFileState> {
     } else {
       emit(GetDocumentFileFailure(response.message));
     }
+
   }
 }

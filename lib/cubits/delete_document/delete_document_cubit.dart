@@ -15,7 +15,9 @@ class DeleteDocumentCubit extends Cubit<DeleteDocumentState> {
 
     response = await DeleteDocumentRequest(id).send();
 
+
     if (response.status == AppStrings.success) {
+      
       emit(DeleteDocumentCompleted());
     } else {
       emit(DeleteDocumentFailure(response.message));

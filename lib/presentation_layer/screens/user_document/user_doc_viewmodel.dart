@@ -1,5 +1,7 @@
 import 'package:bookipedia/app/style/app_text_style.dart';
+
 import 'package:bookipedia/cubits/get_document_file/get_document_file_cubit.dart';
+
 import 'package:bookipedia/cubits/user_document/user_document_state.dart';
 import 'package:bookipedia/cubits/delete_document/delete_document_cubit.dart';
 import 'package:bookipedia/cubits/documents_list/document_list_cubit.dart';
@@ -28,8 +30,10 @@ class UserDocsViewModel {
     } else if (documentListState is DocumentListCompleted) {
       return showDocumentsList(documentList);
     }
+
     return SomethingWentWrong(
         onPressed: () => DocumentListCubit.get(context).sendRequest());
+
   }
 
   Widget showDocumentsList(documentList) {
@@ -48,6 +52,7 @@ class UserDocsViewModel {
         itemBuilder: (context, index) {
           return documentCard(documentList, index, context);
         });
+
   }
 
   void deleteDocumentListener(context, state) {
@@ -87,5 +92,6 @@ class UserDocsViewModel {
                   .sendRequest(id: item.id, index: index);
               Navigator.of(context).pop();
             }));
+
   }
 }

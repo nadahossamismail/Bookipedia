@@ -16,6 +16,7 @@ class GetDocumentFileRequest {
 
     try {
       response = await dio.get("${ApiEndpoints.getDocumentFile}$id",
+
           options: Options(
               headers: ApiHeaders.tokenHeader,
               responseType: ResponseType.bytes));
@@ -26,6 +27,7 @@ class GetDocumentFileRequest {
     } catch (error) {
       var handler = ErrorHandler.handle(error);
       return GetDocumentFileResponse.empty(message: handler.failure.message);
+
     }
   }
 }
